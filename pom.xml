@@ -1075,8 +1075,8 @@
                 </property>
             </activation>
             <properties>
-                <spec.license>efsl-1.0</spec.license>
-                <tck.license>eftckl-1.0</tck.license>
+                <spec.license>efsl-1.1</spec.license>
+                <tck.license>eftckl-1.1</tck.license>
             </properties>
         </profile>
         
