@@ -68,7 +68,7 @@
         <version.plugin.copy.rename>1.0.1</version.plugin.copy.rename>
         <version.plugin.release>3.0.1</version.plugin.release>
         <version.plugin.gpg>3.2.4</version.plugin.gpg>
-        <version.plugin.staging>1.7.0</version.plugin.staging>
+        <version.plugin.publishing>0.8.0</version.plugin.publishing>
         <!--SBOM generation -->
         <version.plugin.cyclonedx>2.8.0</version.plugin.cyclonedx>
 
@@ -122,14 +122,12 @@
 
     <distributionManagement>
         <repository>
-            <id>ossrh</id>
-            <name>Sonatype OSSRH - Release Staging Area</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>central</id>
+            <url>https://central.sonatype.org/publish/publish-maven/</url>
         </repository>
         <snapshotRepository>
-            <id>ossrh</id>
-            <name>Sonatype OSSRH Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <id>central-snapshots</id>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
             <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
@@ -1065,14 +1063,13 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>${version.plugin.staging}</version>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${version.plugin.publishing}</version>
                         <extensions>true</extensions>
                         <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
                 </plugins>
