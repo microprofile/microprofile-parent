@@ -24,7 +24,7 @@
     <packaging>pom</packaging>
     <name>MicroProfile Parent POM</name>
     <description>MicroProfile Parent POM. This pom aligns with Jakarta EE 10 Core Profile and Java 11. Using this parent POM requires building with at least JDK 11.</description>
-    <url>http://microprofile.io</url>
+    <url>https://microprofile.io</url>
 
     <properties>
         <!-- Cross plugins settings -->
