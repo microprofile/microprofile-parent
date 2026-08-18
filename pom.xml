@@ -1051,7 +1051,7 @@
             <id>staging</id>
             <activation>
                 <property>
-                    <name>staging</name>
+                    <name>!skipStaging</name>
                 </property>
             </activation>
             <repositories>
