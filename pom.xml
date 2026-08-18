@@ -1096,8 +1096,8 @@
             <repositories>
                 <repository>
                     <name>Eclipse Nexus Staging</name>
-                    <id>repo3.eclipse.org</id>
-                    <url>https://repo3.eclipse.org/repository/${nexus.staging.repository}/</url>
+                    <id>repo.eclipse.org</id>
+                    <url>https://repo.eclipse.org/repository/${nexus.staging.repository}/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
