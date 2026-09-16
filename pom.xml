@@ -24,7 +24,7 @@
     <packaging>pom</packaging>
     <name>MicroProfile Parent POM</name>
     <description>MicroProfile Parent POM</description>
-    <url>http://microprofile.io</url>
+    <url>https://microprofile.io</url>
 
     <properties>
         <!-- Cross plugins settings -->
@@ -46,15 +46,19 @@
 
         <!-- Plugins -->
         <version.microprofile.build-tools>1.2</version.microprofile.build-tools>
+
+        <version.plugin.enforcer>3.5.0</version.plugin.enforcer>
         <version.plugin.compiler>3.13.0</version.plugin.compiler>
         <version.plugin.resources>3.3.1</version.plugin.resources>
         <version.plugin.jar>3.5.0</version.plugin.jar>
         <version.plugin.dependency>3.7.0</version.plugin.dependency>
         <version.plugin.source>3.4.0</version.plugin.source>
         <version.plugin.javadoc>3.7.0</version.plugin.javadoc>
+
         <version.plugin.helper>3.6.0</version.plugin.helper>
         <version.plugin.impsort>1.10.0</version.plugin.impsort>
         <version.plugin.formatter>2.24.1</version.plugin.formatter>
+
         <version.plugin.checkstyle>3.4.0</version.plugin.checkstyle>
         <version.plugin.rat>0.16.1</version.plugin.rat>
         <version.plugin.bnd>7.0.0</version.plugin.bnd>
@@ -65,10 +69,13 @@
 
         <!-- Asciidoctor support versions -->
         <asciidoctor.maven.plugin.version>2.2.6</asciidoctor.maven.plugin.version>
+        <asciidoctorj.version>2.5.13</asciidoctorj.version>
         <asciidoctorj.pdf.version>2.3.17</asciidoctorj.pdf.version>
+        <jruby.version>9.4.12.1</jruby.version>
 
         <version.plugin.copy.rename>1.0.1</version.plugin.copy.rename>
-        <version.plugin.release>3.1.4</version.plugin.release>
+        <version.plugin.release>3.3.1</version.plugin.release>
+        <version.plugin.deploy>3.1.4</version.plugin.deploy>
         <version.plugin.gpg>3.2.4</version.plugin.gpg>
         <!--SBOM generation -->
         <version.plugin.cyclonedx>2.8.0</version.plugin.cyclonedx>
@@ -118,7 +125,7 @@
         <connection>scm:git:https://github.com/microprofile/microprofile-parent.git</connection>
         <developerConnection>scm:git:git@github.com:microprofile/microprofile-parent.git</developerConnection>
         <url>https://github.com/microprofile/microprofile-parent</url>
-        <tag>2.6</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
@@ -465,6 +472,25 @@
                     <groupId>org.asciidoctor</groupId>
                     <artifactId>asciidoctor-maven-plugin</artifactId>
                     <version>${asciidoctor.maven.plugin.version}</version>
+                    <dependencies>
+                    <!-- Comment this section to use the default jruby artifact provided by the plugin -->
+                    <dependency>
+                        <groupId>org.jruby</groupId>
+                        <artifactId>jruby</artifactId>
+                        <version>${jruby.version}</version>
+                    </dependency>
+                    <!-- Comment this section to use the default AsciidoctorJ artifact provided by the plugin -->
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj</artifactId>
+                        <version>${asciidoctorj.version}</version>
+                    </dependency>
+                        <dependency>
+                            <groupId>org.asciidoctor</groupId>
+                            <artifactId>asciidoctorj-pdf</artifactId>
+                            <version>${asciidoctorj.pdf.version}</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
                         <sourceDocumentName>${project.artifactId}.asciidoc</sourceDocumentName>
                         <attributes>
@@ -499,15 +525,7 @@
                             </configuration>
                         </execution>
                     </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.asciidoctor</groupId>
-                            <artifactId>asciidoctorj-pdf</artifactId>
-                            <version>${asciidoctorj.pdf.version}</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
-
                 <!-- Release -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -520,6 +538,11 @@
                         <localCheckout>true</localCheckout>
                         <arguments>${release.arguments} -Prelease -Drelease.revision=${release.revision}</arguments>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${version.plugin.deploy}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -536,6 +559,11 @@
                             <arg>loopback</arg>
                         </gpgArguments>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${version.plugin.enforcer}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.eclipse.cbi.central</groupId>
@@ -1037,49 +1065,6 @@
         </profile>
 
         <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>java-release</id>
-            <activation>
-                <jdk>[9,)</jdk>
-            </activation>
-            <properties>
-                <maven.compiler.release>${java.release}</maven.compiler.release>
-            </properties>
-        </profile>
-
-        <profile>
             <id>staging</id>
             <activation>
                 <property>
@@ -1280,7 +1265,7 @@
                 </plugins>
             </build>
         </profile>
-
+        
         <!--
             Promotes an artifact from the an eclipse managed staging repository
             to maven central, which will maintain the artifact's hash values for certification requests.
@@ -1313,16 +1298,16 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
                             <configuration>
-                                <skip>true</skip>
+                                <skip>false</skip>
                             </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.eclipse.cbi.central</groupId>
                         <artifactId>central-staging-plugins</artifactId>
-                        <version>${version.eclipse.staging}</version>
                         <executions>
                             <execution>
                                 <id>sync-to-central</id>
+                                <inherited>true</inherited>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>rc-sync</goal>
