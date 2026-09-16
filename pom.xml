@@ -1297,7 +1297,7 @@
                         <executions>
                             <execution>
                                 <id>sync-to-central</id>
-                                <inherited>true</inherited>
+                                <inherited>false</inherited>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>rc-sync</goal>
