@@ -1288,7 +1288,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
                             <configuration>
-                                <skip>true</skip>
+                                <skip>false</skip>
                             </configuration>
                     </plugin>
                     <plugin>
@@ -1297,7 +1297,7 @@
                         <executions>
                             <execution>
                                 <id>sync-to-central</id>
-                                <inherited>false</inherited>
+                                <inherited>true</inherited>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>rc-sync</goal>
