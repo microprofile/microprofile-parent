@@ -60,8 +60,7 @@
         <version.plugin.bnd>7.0.0</version.plugin.bnd>
         <!-- Staging releases-->
         <version.eclipse.staging>1.4.3</version.eclipse.staging>
-        <staging.prefix>microprofile-parent</staging.prefix>
-        <nexus.staging.repository>${staging.prefix}-maven2-staging</nexus.staging.repository>
+        <nexus.staging.repository>microprofile-maven2-staging</nexus.staging.repository>
 
         <!-- Asciidoctor support versions -->
         <asciidoctor.maven.plugin.version>2.2.6</asciidoctor.maven.plugin.version>
@@ -1291,6 +1290,7 @@
                         <executions>
                             <execution>
                                 <id>sync-to-central</id>
+                                <inherited>true</inherited>
                                 <phase>deploy</phase>
                                 <goals>
                                     <goal>rc-sync</goal>
