@@ -63,7 +63,7 @@
         <version.plugin.rat>0.16.1</version.plugin.rat>
         <version.plugin.bnd>7.0.0</version.plugin.bnd>
         <!-- Staging releases-->
-        <version.eclipse.staging>1.4.3</version.eclipse.staging>
+        <version.eclipse.staging>1.4.8</version.eclipse.staging>
         <staging.prefix>microprofile-parent</staging.prefix>
         <nexus.staging.repository>${staging.prefix}-maven2-staging</nexus.staging.repository>
 
@@ -1317,6 +1317,7 @@
                                     <generateChecksums256>true</generateChecksums256>
                                     <generateChecksums512>true</generateChecksums512>
                                     <repositoryUrl>https://repo.eclipse.org/repository/${nexus.staging.repository}/</repositoryUrl>
+                                    <downloadAdditionalClassifiers>pdf,html,tests.jar,test-javadoc.jar,test-sources.jar</downloadAdditionalClassifiers>
                                     <signArtifacts>true</signArtifacts>
                                     <syncAutoPublish>true</syncAutoPublish>
                                     <syncDropAfterPublish>true</syncDropAfterPublish>
