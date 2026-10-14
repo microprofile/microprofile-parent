@@ -525,7 +525,7 @@
                 <!-- Release -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
+                    <artifactId>maven-release-plugin</artifactId>
                     <version>${version.plugin.release}</version>
                     <configuration>
                         <autoVersionSubmodules>true</autoVersionSubmodules>
