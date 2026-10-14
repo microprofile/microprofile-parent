@@ -71,7 +71,7 @@
         <jruby.version>9.4.12.1</jruby.version>
 
         <version.plugin.copy.rename>1.0.1</version.plugin.copy.rename>
-        <version.plugin.release>3.1.4</version.plugin.release>
+        <version.plugin.release>3.3.1</version.plugin.release>
         <version.plugin.gpg>3.2.4</version.plugin.gpg>
         <!--SBOM generation -->
         <version.plugin.cyclonedx>2.8.0</version.plugin.cyclonedx>
